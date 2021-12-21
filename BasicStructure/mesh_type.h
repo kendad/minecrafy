@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include "perlin_noise.h"
 
 //Plane Mesh
 
@@ -200,6 +201,7 @@ public:
                 }
             }
         }
+        generate_mesh_by_perlin_noise();
     }
 
     void drawCircle() {
@@ -227,6 +229,34 @@ public:
                         vectorVertices.push_back(tmpVertex);
                     }
                 }
+            }
+        }
+    }
+
+    void generate_mesh_by_perlin_noise() {
+        vectorVertices.clear();
+        int numberOfCubes = 50;//NxNxN world
+        int tmp = 0;
+        for (int x = 0; x < numberOfCubes; x++) {
+            for (int z = 0; z < numberOfCubes; z++) {
+                int height=round(fPerlinNoise2D[tmp]*16);
+                for (int y = 0; y < height; y++) {
+                    for (int i = 0; i < sizeof(baseCube) / sizeof(baseCube[0]); i += 5) {
+                        Vertex tmpVertex;
+                        tmpVertex.x = baseCube[i];
+                        tmpVertex.y = baseCube[i + 1];
+                        tmpVertex.z = baseCube[i + 2];
+                        tmpVertex.u = baseCube[i + 3];
+                        tmpVertex.v = baseCube[i + 4];
+                        //change vertex positions here
+                        tmpVertex.x += ((2 * (float)x) * 0.5f);
+                        tmpVertex.y += ((2 * (float)y) * 0.5f);
+                        tmpVertex.z += ((2 * (float)z) * -0.5f);
+                        //update the vector vertices
+                        vectorVertices.push_back(tmpVertex);
+                    }
+                }
+                tmp += 1;
             }
         }
     }

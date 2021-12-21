@@ -19,8 +19,10 @@
 #include "camera.h"
 #include "mesh_type.h"
 #include "world_generator.h"
+#include "perlin_noise.h"
 
-
+//Perlin Noise
+PerlinNoise perlinNoise;
 //chunk generator
 ChunkGenerator chunkGenerator;
 VertexBuffer* vertexBufferObject;

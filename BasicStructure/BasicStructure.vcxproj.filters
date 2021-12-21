@@ -47,6 +47,9 @@
     <ClInclude Include="world_generator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="perlin_noise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shader.vs">
