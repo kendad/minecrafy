@@ -5,6 +5,9 @@ float* fPerlinNoise2D = nullptr;
 
 class PerlinNoise {
 public:
+	float* fNoiseSeed2D = nullptr;
+	int nOctaveCount = 4;//generate maps//change values to see different results//5 max---4
+	float fScalingBias = 2.8f;//increase(lesser features)----decrease(higher features) features---0.8f
 	PerlinNoise() {
 		updatePerlinNoise();
 	}
@@ -12,13 +15,9 @@ public:
 	void updatePerlinNoise() {
 		int nOutputWidth = 50;
 		int nOutputHeight = 50;
-		float* fNoiseSeed2D = nullptr;
 
 		fNoiseSeed2D = new float[nOutputWidth * nOutputHeight];
 		fPerlinNoise2D = new float[nOutputWidth * nOutputHeight];
-
-		int nOctaveCount = 4;//generate maps//change values to see different results//5 max---4
-		float fScalingBias = 2.8f;//increase(lesser features)----decrease(higher features) features---0.8f
 
 		//generate the seeds to create the perlin noise
 		for (int i = 0; i < nOutputWidth * nOutputHeight; i++) fNoiseSeed2D[i] = (float)rand() / (float)RAND_MAX;
@@ -64,5 +63,9 @@ public:
 				fOutput[y * nWidth + x] = fNoise / fScaleAcc;
 			}
 
+	}
+
+	void updateSeed() {
+		for (int i = 0; i < 50*50; i++) fNoiseSeed2D[i] = (float)rand() / (float)RAND_MAX;
 	}
 };

@@ -164,4 +164,23 @@ void processInput(GLFWwindow *window) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
 		glfwSetWindowShouldClose(window, true);
 	}
+	if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS) {
+		perlinNoise.updateSeed();
+		perlinNoise.updatePerlinNoise();
+		chunkGenerator.generate_mesh_by_perlin_noise();
+		vertexBufferObject->generateBuffer();
+	}
+	 //update the scaling factor
+	if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS) {
+		if (perlinNoise.fScalingBias < 2.8) perlinNoise.fScalingBias += 0.2;
+		perlinNoise.updatePerlinNoise();
+		chunkGenerator.generate_mesh_by_perlin_noise();
+		vertexBufferObject->generateBuffer();
+	}
+	if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS) {
+		if (perlinNoise.fScalingBias > 0.2) perlinNoise.fScalingBias -= 0.2;
+		perlinNoise.updatePerlinNoise();
+		chunkGenerator.generate_mesh_by_perlin_noise();
+		vertexBufferObject->generateBuffer();
+	}
 }
