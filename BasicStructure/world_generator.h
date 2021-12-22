@@ -43,16 +43,22 @@ public:
 	}
 
 	void draw(int* modelLoc) {
-		//16x16x16 world of cubes
-		for (int x = 0; x < 1; x++) {
-			for (int y = 0; y < 1; y++) {
-				for (int z = 0; z < 1; z++) {
-					glm::mat4 model = glm::mat4(1.0f);
-					model = glm::translate(model, glm::vec3(blocks[x][y][z].x, blocks[x][y][z].y, blocks[x][y][z].z));
-					glUniformMatrix4fv(*modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-					glDrawArrays(GL_TRIANGLES, 0, 36*50*50*50);
-				}
-			}
-		}
+		//type-1
+		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f,0.0f,0.0f));
+		glUniformMatrix4fv(*modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36*50*50*50);
+		//type-2
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 16*0.5*2));
+		glUniformMatrix4fv(*modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36 * 50 * 50 * 50);
+		//type-3
+		model = glm::translate(model, glm::vec3(16*0.5*2, 0.0f, 0.0f));
+		glUniformMatrix4fv(*modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36 * 50 * 50 * 50);
+		//type4
+		model = glm::translate(model, glm::vec3(16 * 0.5 * 2, 0.0f, 16 * 0.5 * 2));
+		glUniformMatrix4fv(*modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36 * 50 * 50 * 50);
 	}
 };
