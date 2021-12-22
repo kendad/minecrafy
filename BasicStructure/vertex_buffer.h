@@ -38,6 +38,9 @@ public:
 		//at location 2 
 		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 		glEnableVertexAttribArray(2);
+		//at location3
+		glVertexAttribPointer(3, 1, GL_INT, GL_FALSE, 6 * sizeof(float), (void*)(5 * sizeof(float)));
+		glEnableVertexAttribArray(3);
 
 		//check if EBO is necessary and then create the EBO
 		if (indices != nullptr) {

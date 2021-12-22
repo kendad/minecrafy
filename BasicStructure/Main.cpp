@@ -94,8 +94,8 @@ int main() {
 	vertexBufferObject = &bufferObject;
 
 	//creating the texture
-	Texture texture1("container.jpg", "JPG", ourShader.ID, 0, "texture1");
-	Texture texture2("awesomeface.png","PNG",ourShader.ID,1,"texture2",true);
+	Texture texture1("grass-side.jpg", "JPG", ourShader.ID, 0, "texture1",true);
+	Texture texture2("grass-top.png","PNG",ourShader.ID,1,"texture2",true);
 	//activate the texture
 	texture1.activateTexture();
 	texture2.activateTexture();

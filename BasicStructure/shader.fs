@@ -3,6 +3,7 @@ out vec4 FragColor;
 
 in vec3 vertexColor;
 in vec2 TextCoord;
+flat in int TextureType;
 
 uniform vec4 ourColor;
 
@@ -13,6 +14,10 @@ uniform sampler2D texture2;
 void main(){
 	//FragColor=vec4(vertexColor,1.0);
 	//FragColor=ourColor;
-	//FragColor=texture(texture1,TextCoord);
-	FragColor=mix(texture(texture1,TextCoord),texture(texture2,TextCoord),0.2);
+	if(TextureType==0){
+	FragColor=texture(texture1,TextCoord);
+	}else{
+	FragColor=texture(texture2,TextCoord);
+	}
+	//FragColor=mix(texture(texture1,TextCoord),texture(texture2,TextCoord),0.2);
 }

@@ -49,15 +49,15 @@ public:
 		glUniformMatrix4fv(*modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36*50*50*50);
 		//type-2
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 16*0.5*2));
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -50*0.5*2));
 		glUniformMatrix4fv(*modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36 * 50 * 50 * 50);
 		//type-3
-		model = glm::translate(model, glm::vec3(16*0.5*2, 0.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(50*0.5*2, 0.0f, 0.0f));
 		glUniformMatrix4fv(*modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36 * 50 * 50 * 50);
-		//type4
-		model = glm::translate(model, glm::vec3(16 * 0.5 * 2, 0.0f, 16 * 0.5 * 2));
+		////type4
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 50 * 0.5 * 2));
 		glUniformMatrix4fv(*modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36 * 50 * 50 * 50);
 	}

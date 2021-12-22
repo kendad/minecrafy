@@ -13,8 +13,8 @@ public:
 		fNoiseSeed2D = new float[nOutputWidth * nOutputHeight];
 		fPerlinNoise2D = new float[nOutputWidth * nOutputHeight];
 
-		int nOctaveCount = 4;//generate maps//change values to see different results//5 max
-		float fScalingBias = 0.8f;//increase(lesser features)----decrease(higher features) features
+		int nOctaveCount = 4;//generate maps//change values to see different results//5 max---4
+		float fScalingBias = 2.8f;//increase(lesser features)----decrease(higher features) features---0.8f
 
 		//generate the seeds to create the perlin noise
 		for (int i = 0; i < nOutputWidth * nOutputHeight; i++) fNoiseSeed2D[i] = (float)rand() / (float)RAND_MAX;
