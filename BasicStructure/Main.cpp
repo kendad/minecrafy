@@ -94,11 +94,9 @@ int main() {
 	vertexBufferObject = &bufferObject;
 
 	//creating the texture
-	Texture texture1("grass-side.jpg", "JPG", ourShader.ID, 0, "texture1",true);
-	Texture texture2("grass-top.png","PNG",ourShader.ID,1,"texture2",true);
+	Texture texture1("minecraft.png", "PNG", ourShader.ID, 1, "texture2", true);
 	//activate the texture
 	texture1.activateTexture();
-	texture2.activateTexture();
 	//#######################################################################################
 
 
@@ -133,7 +131,6 @@ int main() {
 		////setting the uniform values only after we have activated the shader
 		glUniform4f(ourColorLocation, 0.0f, 1.0f, 0.0f, 1.0f);
 		texture1.setUniform();
-		texture2.setUniform();
 		glm::mat4 view = camera.viewMatrix();
 		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 		glUniformMatrix4fv(projectionLoc,1,GL_FALSE,glm::value_ptr(projection));

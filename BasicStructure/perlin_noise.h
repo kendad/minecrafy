@@ -6,6 +6,10 @@ float* fPerlinNoise2D = nullptr;
 class PerlinNoise {
 public:
 	PerlinNoise() {
+		updatePerlinNoise();
+	}
+
+	void updatePerlinNoise() {
 		int nOutputWidth = 50;
 		int nOutputHeight = 50;
 		float* fNoiseSeed2D = nullptr;
