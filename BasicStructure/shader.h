@@ -70,6 +70,10 @@ public:
 		glUseProgram(ID);
 	}
 
+	void clearShaderProgram() {
+		glDeleteProgram(ID);
+	}
+
 private:
 	//checking for compilation error
 	void checkCompilationErrors(unsigned int shader, std::string type) {

@@ -168,6 +168,7 @@ void processInput(GLFWwindow *window) {
 		perlinNoise.updateSeed();
 		perlinNoise.updatePerlinNoise();
 		chunkGenerator.generate_mesh_by_perlin_noise();
+		vertexBufferObject->clearBuffer();
 		vertexBufferObject->generateBuffer();
 	}
 	 //update the scaling factor
@@ -175,12 +176,14 @@ void processInput(GLFWwindow *window) {
 		if (perlinNoise.fScalingBias < 2.8) perlinNoise.fScalingBias += 0.2;
 		perlinNoise.updatePerlinNoise();
 		chunkGenerator.generate_mesh_by_perlin_noise();
+		vertexBufferObject->clearBuffer();
 		vertexBufferObject->generateBuffer();
 	}
 	if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS) {
 		if (perlinNoise.fScalingBias > 0.2) perlinNoise.fScalingBias -= 0.2;
 		perlinNoise.updatePerlinNoise();
 		chunkGenerator.generate_mesh_by_perlin_noise();
+		vertexBufferObject->clearBuffer();
 		vertexBufferObject->generateBuffer();
 	}
 }

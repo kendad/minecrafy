@@ -327,13 +327,14 @@ public:
 
     void generate_mesh_by_perlin_noise() {
         vectorVertices.clear();
+        int avgHeight = avgInArray(fPerlinNoise2D,50*50);
         int numberOfCubes = 50;//NxNxN world
         int tmp = 0;
         for (int x = 0; x < numberOfCubes; x++) {
             for (int z = 0; z < numberOfCubes; z++) {
                 int height=round(fPerlinNoise2D[tmp]*50);
                 for (int y = 0; y < height; y++) {
-                    if (height <= 2 && x>0 &&x<49 && z>0 && z<49) {
+                    if (height <= (avgHeight-2) && x>0 &&x<49 && z>0 && z<49) {
                         for (int i = 0; i < sizeof(waterCube) / sizeof(waterCube[0]); i += 5) {
                             Vertex tmpVertex;
                             tmpVertex.x = waterCube[i];
@@ -369,5 +370,20 @@ public:
                 tmp += 1;
             }
         }
+    }
+
+    //find the max value in an array
+    int avgInArray(float arr[], int n)
+    {
+        int i;
+        // Initialize maximum element
+        float total = arr[0];
+
+        // Traverse array elements
+        // from second and compare
+        // every element with current max
+        for (i = 1; i < n; i++)
+            total += arr[i];
+        return round(((total) / (50 * 50)) * 50);
     }
 };

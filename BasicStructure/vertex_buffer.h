@@ -10,14 +10,14 @@
 class VertexBuffer{
 public:
 	unsigned int VAO;
+	unsigned int VBO;
+	unsigned int EBO;
 	//constructor
 	VertexBuffer(unsigned int (*indices)[6]=nullptr) {
 		generateBuffer(indices);
 	}
 
 	void generateBuffer(unsigned int(*indices)[6] = nullptr) {
-		unsigned int VBO;
-		unsigned int EBO;
 		glGenVertexArrays(1, &VAO);
 		glGenBuffers(1, &VBO);
 		//bind the VAO first
@@ -53,5 +53,10 @@ public:
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	}
+
+	void clearBuffer() {
+		glDeleteVertexArrays(1, &VAO);
+		glDeleteBuffers(1, &VBO);
 	}
 };
