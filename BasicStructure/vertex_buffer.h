@@ -30,16 +30,16 @@ public:
 		//ATTRIBUTE DEFINATIONS
 		//telling the GPU how to process the stored data
 		//at location 0
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 		glEnableVertexAttribArray(0);
 		//at location 1 
 		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 		glEnableVertexAttribArray(1);
 		//at location 2 
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 		glEnableVertexAttribArray(2);
-		//at location3
-		glVertexAttribPointer(3, 1, GL_INT, GL_FALSE, 6 * sizeof(float), (void*)(5 * sizeof(float)));
+		//at location 3 
+		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(5 * sizeof(float)));
 		glEnableVertexAttribArray(3);
 
 		//check if EBO is necessary and then create the EBO

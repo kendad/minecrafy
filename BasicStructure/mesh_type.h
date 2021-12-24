@@ -158,100 +158,99 @@ float baseCube[] = {
 
 float plainCube[] = {
     // Back face
-    -0.5f, -0.5f, -0.5f,  0.0f, 0.6f, // Bottom-left 0.0f 0.6
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // top-right  1.0f 1.0f
-     0.5f, -0.5f, -0.5f,  1.0f, 0.6f, // bottom-right 1.0f 0.6f      
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // top-right   1.0f 1.0f
-    -0.5f, -0.5f, -0.5f,  0.0f, 0.6f, // bottom-left 0.0f 0.6f 
-    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f, // top-left    0.0f 1.0f
+    -0.5f, -0.5f, -0.5f,  0.0f, 0.6f, 0.0f, 0.0f, -1.0f, // Bottom-left 0.0f 0.6
+     0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 0.0f, 0.0f, -1.0f,// top-right  1.0f 1.0f
+     0.5f, -0.5f, -0.5f,  1.0f, 0.6f, 0.0f, 0.0f, -1.0f,// bottom-right 1.0f 0.6f      
+     0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 0.0f, 0.0f, -1.0f,// top-right   1.0f 1.0f
+    - 0.5f, -0.5f, -0.5f,  0.0f, 0.6f, 0.0f, 0.0f, -1.0f,// bottom-left 0.0f 0.6f 
+    - 0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f, 0.0f, -1.0f,// top-left    0.0f 1.0f
     // Front face
-    -0.5f, -0.5f,  0.5f,  0.0f, 0.6f, // bottom-left
-     0.5f, -0.5f,  0.5f,  1.0f, 0.6f, // bottom-right
-     0.5f,  0.5f,  0.5f,  1.0f, 1.0f, // top-right
-     0.5f,  0.5f,  0.5f,  1.0f, 1.0f, // top-right
-    -0.5f,  0.5f,  0.5f,  0.0f, 1.0f, // top-left
-    -0.5f, -0.5f,  0.5f,  0.0f, 0.6f, // bottom-left
+    -0.5f, -0.5f,  0.5f,  0.0f, 0.6f, 0.0f,0.0f,1.0f,// bottom-left
+     0.5f, -0.5f,  0.5f,  1.0f, 0.6f, 0.0f,0.0f,1.0f,// bottom-right
+     0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 0.0f,0.0f,1.0f,// top-right
+     0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 0.0f,0.0f,1.0f,// top-right
+    -0.5f,  0.5f,  0.5f,  0.0f, 1.0f, 0.0f,0.0f,1.0f,// top-left
+    -0.5f, -0.5f,  0.5f,  0.0f, 0.6f, 0.0f,0.0f,1.0f,// bottom-left
     // Left face
-    -0.5f,  0.5f,  0.5f,  1.0f, 1.0f, // top-right
-    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f, // top-left
-    -0.5f, -0.5f, -0.5f,  0.0f, 0.6f, // bottom-left
-    -0.5f, -0.5f, -0.5f,  0.0f, 0.6f, // bottom-left
-    -0.5f, -0.5f,  0.5f,  1.0f, 0.6f, // bottom-right
-    -0.5f,  0.5f,  0.5f,  1.0f, 1.0f, // top-right
+    -0.5f,  0.5f,  0.5f,  1.0f, 1.0f, -1.0f,0.0f,0.0f,// top-right
+    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f, -1.0f,0.0f,0.0f,// top-left
+    -0.5f, -0.5f, -0.5f,  0.0f, 0.6f, -1.0f,0.0f,0.0f,// bottom-left
+    -0.5f, -0.5f, -0.5f,  0.0f, 0.6f, -1.0f,0.0f,0.0f,// bottom-left
+    -0.5f, -0.5f,  0.5f,  1.0f, 0.6f, -1.0f,0.0f,0.0f,// bottom-right
+    -0.5f,  0.5f,  0.5f,  1.0f, 1.0f, -1.0f,0.0f,0.0f,// top-right
     // Right face
-     0.5f,  0.5f,  0.5f,  0.0f, 1.0f, // top-left
-     0.5f, -0.5f, -0.5f,  1.0f, 0.6f, // bottom-right
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // top-right         
-     0.5f, -0.5f, -0.5f,  1.0f, 0.6f, // bottom-right
-     0.5f,  0.5f,  0.5f,  0.0f, 1.0f, // top-left
-     0.5f, -0.5f,  0.5f,  0.0f, 0.6f, // bottom-left     
+     0.5f,  0.5f,  0.5f,  0.0f, 1.0f, 1.0f,0.0f,0.0f,// top-left
+     0.5f, -0.5f, -0.5f,  1.0f, 0.6f, 1.0f,0.0f,0.0f,// bottom-right
+     0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f,0.0f,0.0f,// top-right         
+     0.5f, -0.5f, -0.5f,  1.0f, 0.6f, 1.0f,0.0f,0.0f,// bottom-right
+     0.5f,  0.5f,  0.5f,  0.0f, 1.0f, 1.0f,0.0f,0.0f,// top-left
+     0.5f, -0.5f,  0.5f,  0.0f, 0.6f, 1.0f,0.0f,0.0f,// bottom-left     
     // Bottom face
-    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // top-right
-     0.5f, -0.5f, -0.5f,  1.0f, 1.0f, // top-left
-     0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // bottom-left
-     0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // bottom-left
-    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // bottom-right
-    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // top-right
+    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 0.0f,-1.0f,0.0f,// top-right
+     0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 0.0f,-1.0f,0.0f,// top-left
+     0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 0.0f,-1.0f,0.0f,// bottom-left
+     0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 0.0f,-1.0f,0.0f,// bottom-left
+    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 0.0f,-1.0f,0.0f,// bottom-right
+    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 0.0f,-1.0f,0.0f,// top-right
     // Top face
-    -0.5f,  0.5f, -0.5f,  0.0f, 0.6f, // top-left
-     0.5f,  0.5f,  0.5f,  1.0f, 0.4f, // bottom-right
-     0.5f,  0.5f, -0.5f,  1.0f, 0.6f, // top-right     
-     0.5f,  0.5f,  0.5f,  1.0f, 0.4f, // bottom-right
-    -0.5f,  0.5f, -0.5f,  0.0f, 0.6f, // top-left
-    -0.5f,  0.5f,  0.5f,  0.0f, 0.4f, // bottom-left
+    -0.5f,  0.5f, -0.5f,  0.0f, 0.6f, 0.0f,1.0f,0.0f,// top-left
+     0.5f,  0.5f,  0.5f,  1.0f, 0.4f, 0.0f,1.0f,0.0f,// bottom-right
+     0.5f,  0.5f, -0.5f,  1.0f, 0.6f, 0.0f,1.0f,0.0f,// top-right     
+     0.5f,  0.5f,  0.5f,  1.0f, 0.4f, 0.0f,1.0f,0.0f,// bottom-right
+    -0.5f,  0.5f, -0.5f,  0.0f, 0.6f, 0.0f,1.0f,0.0f,// top-left
+    -0.5f,  0.5f,  0.5f,  0.0f, 0.4f, 0.0f,1.0f,0.0f,// bottom-left
 };
 
 float waterCube[] = {
     // Back face
-    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, // Bottom-left 
-     0.5f,  0.5f, -0.5f,  1.0f, 0.3f, // top-right  
-     0.5f, -0.5f, -0.5f,  1.0f, 0.0f, // bottom-right      
-     0.5f,  0.5f, -0.5f,  1.0f, 0.3f, // top-right   
-    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, // bottom-left 
-    -0.5f,  0.5f, -0.5f,  0.0f, 0.3f, // top-left    
+    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 0.0f, 0.0f, -1.0f,// Bottom-left 
+     0.5f,  0.5f, -0.5f,  1.0f, 0.3f, 0.0f, 0.0f, -1.0f,// top-right  
+     0.5f, -0.5f, -0.5f,  1.0f, 0.0f, 0.0f, 0.0f, -1.0f,// bottom-right      
+     0.5f,  0.5f, -0.5f,  1.0f, 0.3f, 0.0f, 0.0f, -1.0f,// top-right   
+    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 0.0f, 0.0f, -1.0f,// bottom-left 
+    -0.5f,  0.5f, -0.5f,  0.0f, 0.3f, 0.0f, 0.0f, -1.0f,// top-left    
     // Front face
-    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // bottom-left
-     0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // bottom-right
-     0.5f,  0.5f,  0.5f,  1.0f, 0.3f, // top-right
-     0.5f,  0.5f,  0.5f,  1.0f, 0.3f, // top-right
-    -0.5f,  0.5f,  0.5f,  0.0f, 0.3f, // top-left
-    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // bottom-left
+    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,  0.0f,0.0f,1.0f,// bottom-left
+     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,  0.0f,0.0f,1.0f,// bottom-right
+     0.5f,  0.5f,  0.5f,  1.0f, 0.3f,  0.0f,0.0f,1.0f,// top-right
+     0.5f,  0.5f,  0.5f,  1.0f, 0.3f,  0.0f,0.0f,1.0f,// top-right
+    -0.5f,  0.5f,  0.5f,  0.0f, 0.3f,  0.0f,0.0f,1.0f,// top-left
+    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,  0.0f,0.0f,1.0f,// bottom-left
     // Left face
-    -0.5f,  0.5f,  0.5f,  1.0f, 0.3f, // top-right
-    -0.5f,  0.5f, -0.5f,  0.0f, 0.3f, // top-left
-    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, // bottom-left
-    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, // bottom-left
-    -0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // bottom-right
-    -0.5f,  0.5f,  0.5f,  1.0f, 0.3f, // top-right
+    -0.5f,  0.5f,  0.5f,  1.0f, 0.3f, -1.0f,0.0f,0.0f,// top-right
+    -0.5f,  0.5f, -0.5f,  0.0f, 0.3f, -1.0f,0.0f,0.0f,// top-left
+    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, -1.0f,0.0f,0.0f,// bottom-left
+    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, -1.0f,0.0f,0.0f,// bottom-left
+    -0.5f, -0.5f,  0.5f,  1.0f, 0.0f, -1.0f,0.0f,0.0f,// bottom-right
+    -0.5f,  0.5f,  0.5f,  1.0f, 0.3f, -1.0f,0.0f,0.0f,// top-right
     // Right face
-     0.5f,  0.5f,  0.5f,  0.0f, 0.3f, // top-left
-     0.5f, -0.5f, -0.5f,  1.0f, 0.0f, // bottom-right
-     0.5f,  0.5f, -0.5f,  1.0f, 0.3f, // top-right         
-     0.5f, -0.5f, -0.5f,  1.0f, 0.0f, // bottom-right
-     0.5f,  0.5f,  0.5f,  0.0f, 0.3f, // top-left
-     0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // bottom-left     
+     0.5f,  0.5f,  0.5f,  0.0f, 0.3f, 1.0f,0.0f,0.0f,// top-left
+     0.5f, -0.5f, -0.5f,  1.0f, 0.0f, 1.0f,0.0f,0.0f,// bottom-right
+     0.5f,  0.5f, -0.5f,  1.0f, 0.3f, 1.0f,0.0f,0.0f,// top-right         
+     0.5f, -0.5f, -0.5f,  1.0f, 0.0f, 1.0f,0.0f,0.0f,// bottom-right
+     0.5f,  0.5f,  0.5f,  0.0f, 0.3f, 1.0f,0.0f,0.0f,// top-left
+     0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1.0f,0.0f,0.0f,// bottom-left     
     // Bottom face
-    -0.5f, -0.5f, -0.5f,  0.0f, 0.3f, // top-right
-     0.5f, -0.5f, -0.5f,  0.0f, 0.3f, // top-left
-     0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // bottom-left
-     0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // bottom-left
-    -0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // bottom-right
-    -0.5f, -0.5f, -0.5f,  0.0f, 0.3f, // top-right
+    -0.5f, -0.5f, -0.5f,  0.0f, 0.3f, 0.0f,-1.0f,0.0f,// top-right
+     0.5f, -0.5f, -0.5f,  0.0f, 0.3f, 0.0f,-1.0f,0.0f,// top-left
+     0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 0.0f,-1.0f,0.0f,// bottom-left
+     0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 0.0f,-1.0f,0.0f,// bottom-left
+    -0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 0.0f,-1.0f,0.0f,// bottom-right
+    -0.5f, -0.5f, -0.5f,  0.0f, 0.3f, 0.0f,-1.0f,0.0f,// top-right
     // Top face
-    -0.5f,  0.5f, -0.5f,  0.0f, 0.3f, // top-left
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // bottom-right
-     0.5f,  0.5f, -0.5f,  1.0f, 0.3f, // top-right     
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // bottom-right
-    -0.5f,  0.5f, -0.5f,  0.0f, 0.3f, // top-left
-    -0.5f,  0.5f,  0.5f,  0.0f, 0.0f, // bottom-left
+    -0.5f,  0.5f, -0.5f,  0.0f, 0.3f, 0.0f,1.0f,0.0f,// top-left
+     0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f,1.0f,0.0f,// bottom-right
+     0.5f,  0.5f, -0.5f,  1.0f, 0.3f, 0.0f,1.0f,0.0f,// top-right     
+     0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f,1.0f,0.0f,// bottom-right
+    -0.5f,  0.5f, -0.5f,  0.0f, 0.3f, 0.0f,1.0f,0.0f,// top-left
+    -0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 0.0f,1.0f,0.0f,// bottom-left
 };
 
 //Chuck Generator
 typedef struct {
     float x, y, z;//positions
     float u, v;//texture co-ordinates
-    //float isActive;
-    int textureType;
+    float nx, ny, nz;//normal co-ordinates
 }
 Vertex;
 
@@ -335,13 +334,16 @@ public:
                 int height=round(fPerlinNoise2D[tmp]*50);
                 for (int y = 0; y < height; y++) {
                     if (height <= (avgHeight-2) && x>0 &&x<49 && z>0 && z<49) {
-                        for (int i = 0; i < sizeof(waterCube) / sizeof(waterCube[0]); i += 5) {
+                        for (int i = 0; i < sizeof(waterCube) / sizeof(waterCube[0]); i += 8) {
                             Vertex tmpVertex;
                             tmpVertex.x = waterCube[i];
                             tmpVertex.y = waterCube[i + 1];
                             tmpVertex.z = waterCube[i + 2];
                             tmpVertex.u = waterCube[i + 3];
                             tmpVertex.v = waterCube[i + 4];
+                            tmpVertex.nx = waterCube[i + 5];
+                            tmpVertex.ny = waterCube[i + 6];
+                            tmpVertex.nz = waterCube[i + 7];
                             //change vertex positions here
                             tmpVertex.x += ((2 * (float)x) * 0.5f);
                             tmpVertex.y += ((2 * (float)y) * 0.5f);
@@ -351,13 +353,16 @@ public:
                         }
                     }
                     else {
-                        for (int i = 0; i < sizeof(plainCube) / sizeof(plainCube[0]); i += 5) {
+                        for (int i = 0; i < sizeof(plainCube) / sizeof(plainCube[0]); i += 8) {
                             Vertex tmpVertex;
                             tmpVertex.x = plainCube[i];
                             tmpVertex.y = plainCube[i + 1];
                             tmpVertex.z = plainCube[i + 2];
                             tmpVertex.u = plainCube[i + 3];
                             tmpVertex.v = plainCube[i + 4];
+                            tmpVertex.nx = plainCube[i + 5];
+                            tmpVertex.ny = plainCube[i + 6];
+                            tmpVertex.nz = plainCube[i + 7];
                             //change vertex positions here
                             tmpVertex.x += ((2 * (float)x) * 0.5f);
                             tmpVertex.y += ((2 * (float)y) * 0.5f);

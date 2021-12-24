@@ -105,6 +105,7 @@ int main() {
 	int modelLoc = glGetUniformLocation(ourShader.ID, "model");
 	int viewLoc = glGetUniformLocation(ourShader.ID, "view");
 	int projectionLoc = glGetUniformLocation(ourShader.ID,"projection");
+	int eyePosLoc = glGetUniformLocation(ourShader.ID,"eyePos");
 
 	//activate the depth buffer
 	glEnable(GL_DEPTH_TEST);
@@ -134,7 +135,7 @@ int main() {
 		glm::mat4 view = camera.viewMatrix();
 		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 		glUniformMatrix4fv(projectionLoc,1,GL_FALSE,glm::value_ptr(projection));
-		
+		glUniform3fv(eyePosLoc,1,glm::value_ptr(camera.cameraPos));
 
 		//Activate the VAO
 		//glBindVertexArray(VAO);
