@@ -10,6 +10,7 @@
 
 #include <iostream>
 
+
 class Cube {
 public:
 	bool isActive;

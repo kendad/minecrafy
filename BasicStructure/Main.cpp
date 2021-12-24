@@ -123,7 +123,7 @@ int main() {
 		camera.processInput(window,deltaTime);
 
 		//clear the window with a certain color
-		glClearColor(0.2f,0.3f,0.3f,1.0f);//setting window fill color
+		glClearColor(0.0f,0.0f,0.0f,0.0f);//setting window fill color
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);//filling the buffer with that color
 
 		//activate the shader to use
