@@ -19,7 +19,7 @@ vec3 diffuseProp=vec3(1.0f, 0.829f, 0.829f);
 vec3 specularProp=vec3(0.296648f, 0.296648f, 0.296648f);
 float shininess=11.26f;
 vec3 lightPos=vec3(0.0f,50.0f,0.0f);
-vec3 lightColor=vec3(1.0f,1.0f,1.0f);
+vec3 lightColor=vec3(0.8f);
 
 //calculating the direction vector
 vec3 norm=normalize(Normal);

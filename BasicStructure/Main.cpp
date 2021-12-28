@@ -26,10 +26,13 @@ PerlinNoise perlinNoise;
 //chunk generator
 ChunkGenerator chunkGenerator;
 VertexBuffer* vertexBufferObject;
+int objectLocation = 0;
 
 //function template defined here
 void call_on_window_resize(GLFWwindow* window,int width,int height);//called on every window resized
 void processInput(GLFWwindow* window);//processes User Input
+void raycast(int ourColorLocation);
+float calculateT(glm::vec3 normal,glm::vec3 position);
 
 //basic screen setting
 const unsigned int SCR_WIDTH = 800;
@@ -130,7 +133,7 @@ int main() {
 		ourShader.use();
 
 		////setting the uniform values only after we have activated the shader
-		glUniform4f(ourColorLocation, 0.0f, 1.0f, 0.0f, 1.0f);
+		glUniform4f(ourColorLocation, 0.0f, 1.0f, 0.0f, 0.0f);
 		texture1.setUniform();
 		glm::mat4 view = camera.viewMatrix();
 		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
@@ -141,7 +144,8 @@ int main() {
 		//glBindVertexArray(VAO);
 		glBindVertexArray(bufferObject.VAO);
 
-		//Draw first cube
+		//Draw the world
+		raycast(ourColorLocation);
 		worldGenerator.draw(&modelLoc);
 
 		//swap the buffer
@@ -187,4 +191,102 @@ void processInput(GLFWwindow *window) {
 		vertexBufferObject->clearBuffer();
 		vertexBufferObject->generateBuffer();
 	}
+	if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS) {
+		for (int i = 0; i < 36;i++ ) {
+			vectorVertices.erase(vectorVertices.begin()+objectLocation+i);
+		}
+		vertexBufferObject->clearBuffer();
+		vertexBufferObject->generateBuffer();
+	}
+}
+
+
+//void raycast(int ourColorLocation) {
+//	float t=0.0f;
+//	int pos = 0;
+//	for (int i = 0; i < vectorVertices.size(); i+=36) {
+//		glm::vec3 normal = glm::vec3(vectorVertices[i].nx,vectorVertices[i].ny,vectorVertices[i].nz);
+//		glm::vec3 position = glm::vec3(vectorVertices[i].x, vectorVertices[i].y, vectorVertices[i].z);
+//		t = calculateT(normal,position);
+//		if (t > 0) {
+//			pos = i;
+//			break;
+//		}
+//		//////////////////////////////
+//		normal = glm::vec3(vectorVertices[i+6].nx, vectorVertices[i+6].ny, vectorVertices[i+6].nz);
+//		position = glm::vec3(vectorVertices[i+6].x, vectorVertices[i+6].y, vectorVertices[i+6].z);
+//		t = calculateT(normal, position);
+//		if (t > 0) {
+//			pos = i;
+//			break;
+//		}
+//		///////////////////////
+//		normal = glm::vec3(vectorVertices[i+12].nx, vectorVertices[i+12].ny, vectorVertices[i+12].nz);
+//		position = glm::vec3(vectorVertices[i+12].x, vectorVertices[i+12].y, vectorVertices[i+12].z);
+//		t = calculateT(normal, position);
+//		if (t > 0) {
+//			pos = i;
+//			break;
+//		}
+//		/////////////////////
+//		normal = glm::vec3(vectorVertices[i+18].nx, vectorVertices[i+18].ny, vectorVertices[i+18].nz);
+//		position = glm::vec3(vectorVertices[i+18].x, vectorVertices[i+18].y, vectorVertices[i+18].z);
+//		t = calculateT(normal, position);
+//		if (t > 0) {
+//			pos = i;
+//			break;
+//		}
+//		////////////////////////////
+//		normal = glm::vec3(vectorVertices[i+24].nx, vectorVertices[i+24].ny, vectorVertices[i+24].nz);
+//		position = glm::vec3(vectorVertices[i+24].x, vectorVertices[i+24].y, vectorVertices[i+24].z);
+//		t = calculateT(normal, position);
+//		if (t > 0) {
+//			pos = i;
+//			break;
+//		}
+//		///////////////////////////////
+//		normal = glm::vec3(vectorVertices[i+30].nx, vectorVertices[i+30].ny, vectorVertices[i+30].nz);
+//		position = glm::vec3(vectorVertices[i+30].x, vectorVertices[i+30].y, vectorVertices[i+30].z);
+//		t = calculateT(normal, position);
+//		if (t > 0) {
+//			pos = i;
+//			break;
+//		}
+//	}
+//	std::cout << t << std::endl;
+//}
+
+void raycast(int ourColorLocation) {
+	glm::vec3 ray = camera.cameraPos + (camera.cameraFront * 2);
+	/*std::cout<<"CameraPos: " << glm::to_string(camera.cameraPos) << std::endl;
+	std::cout<<"Ray Pos: " << glm::to_string(ray)<<std::endl;
+	glm::vec3 max = glm::vec3(vectorVertices[32].x, vectorVertices[32].y, vectorVertices[32].z);
+	glm::vec3 min = glm::vec3(vectorVertices[28].x,vectorVertices[28].y,vectorVertices[28].z);
+	std::cout << "Max: " << glm::to_string(max) << std::endl;
+	std::cout << "Min: " << glm::to_string(min) << std::endl;
+	std::cout << "X: " << (min.x <= ray.x && ray.x <= max.x) << std::endl;
+	std::cout << "Y: " << (min.y <= ray.y && ray.y <= max.y) << std::endl;
+	std::cout << "Z: "<< (max.z <= ray.z && ray.z <= min.z) << std::endl;*/
+	for (int i = 0; i < vectorVertices.size(); i += 36) {
+		glm::vec3 max = glm::vec3(vectorVertices[i+32].x, vectorVertices[i+32].y, vectorVertices[i+32].z);
+		glm::vec3 min = glm::vec3(vectorVertices[i+28].x, vectorVertices[i+28].y, vectorVertices[i+28].z);
+		bool condition1 = min.x <= ray.x && ray.x <= max.x;
+		bool condition2 = min.y <= ray.y && ray.y <= max.y;
+		bool condition3 = max.z <= ray.z && ray.z <= min.z;
+		if (condition1 == true && condition2 == true && condition3 == true) {
+			objectLocation = i;
+			std::cout << "hit detected at:-> "<<i << std::endl;
+		}
+	}
+}
+
+float calculateT(glm::vec3 normal,glm::vec3 position) {
+	glm::vec3 origin = camera.cameraPos;
+	glm::vec3 direction = camera.cameraFront;
+	float delta = glm::dot(normal,position);
+	if (glm::dot(direction, normal) == 0) {//if denominator=0 then no intersection
+		return -1.0f;
+	}
+	float t = ((glm::dot(origin, normal)) + delta) / (glm::dot(direction, normal));
+	return t;
 }
