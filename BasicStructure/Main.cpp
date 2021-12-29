@@ -133,7 +133,7 @@ int main() {
 		ourShader.use();
 
 		////setting the uniform values only after we have activated the shader
-		glUniform4f(ourColorLocation, 0.0f, 1.0f, 0.0f, 0.0f);
+		glUniform4f(ourColorLocation, 1.0f, 1.0f, 1.0f, 1.0f);
 		texture1.setUniform();
 		glm::mat4 view = camera.viewMatrix();
 		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
@@ -201,72 +201,8 @@ void processInput(GLFWwindow *window) {
 }
 
 
-//void raycast(int ourColorLocation) {
-//	float t=0.0f;
-//	int pos = 0;
-//	for (int i = 0; i < vectorVertices.size(); i+=36) {
-//		glm::vec3 normal = glm::vec3(vectorVertices[i].nx,vectorVertices[i].ny,vectorVertices[i].nz);
-//		glm::vec3 position = glm::vec3(vectorVertices[i].x, vectorVertices[i].y, vectorVertices[i].z);
-//		t = calculateT(normal,position);
-//		if (t > 0) {
-//			pos = i;
-//			break;
-//		}
-//		//////////////////////////////
-//		normal = glm::vec3(vectorVertices[i+6].nx, vectorVertices[i+6].ny, vectorVertices[i+6].nz);
-//		position = glm::vec3(vectorVertices[i+6].x, vectorVertices[i+6].y, vectorVertices[i+6].z);
-//		t = calculateT(normal, position);
-//		if (t > 0) {
-//			pos = i;
-//			break;
-//		}
-//		///////////////////////
-//		normal = glm::vec3(vectorVertices[i+12].nx, vectorVertices[i+12].ny, vectorVertices[i+12].nz);
-//		position = glm::vec3(vectorVertices[i+12].x, vectorVertices[i+12].y, vectorVertices[i+12].z);
-//		t = calculateT(normal, position);
-//		if (t > 0) {
-//			pos = i;
-//			break;
-//		}
-//		/////////////////////
-//		normal = glm::vec3(vectorVertices[i+18].nx, vectorVertices[i+18].ny, vectorVertices[i+18].nz);
-//		position = glm::vec3(vectorVertices[i+18].x, vectorVertices[i+18].y, vectorVertices[i+18].z);
-//		t = calculateT(normal, position);
-//		if (t > 0) {
-//			pos = i;
-//			break;
-//		}
-//		////////////////////////////
-//		normal = glm::vec3(vectorVertices[i+24].nx, vectorVertices[i+24].ny, vectorVertices[i+24].nz);
-//		position = glm::vec3(vectorVertices[i+24].x, vectorVertices[i+24].y, vectorVertices[i+24].z);
-//		t = calculateT(normal, position);
-//		if (t > 0) {
-//			pos = i;
-//			break;
-//		}
-//		///////////////////////////////
-//		normal = glm::vec3(vectorVertices[i+30].nx, vectorVertices[i+30].ny, vectorVertices[i+30].nz);
-//		position = glm::vec3(vectorVertices[i+30].x, vectorVertices[i+30].y, vectorVertices[i+30].z);
-//		t = calculateT(normal, position);
-//		if (t > 0) {
-//			pos = i;
-//			break;
-//		}
-//	}
-//	std::cout << t << std::endl;
-//}
-
 void raycast(int ourColorLocation) {
-	glm::vec3 ray = camera.cameraPos + (camera.cameraFront * 2);
-	/*std::cout<<"CameraPos: " << glm::to_string(camera.cameraPos) << std::endl;
-	std::cout<<"Ray Pos: " << glm::to_string(ray)<<std::endl;
-	glm::vec3 max = glm::vec3(vectorVertices[32].x, vectorVertices[32].y, vectorVertices[32].z);
-	glm::vec3 min = glm::vec3(vectorVertices[28].x,vectorVertices[28].y,vectorVertices[28].z);
-	std::cout << "Max: " << glm::to_string(max) << std::endl;
-	std::cout << "Min: " << glm::to_string(min) << std::endl;
-	std::cout << "X: " << (min.x <= ray.x && ray.x <= max.x) << std::endl;
-	std::cout << "Y: " << (min.y <= ray.y && ray.y <= max.y) << std::endl;
-	std::cout << "Z: "<< (max.z <= ray.z && ray.z <= min.z) << std::endl;*/
+	glm::vec3 ray = camera.cameraPos + (camera.cameraFront * 3);
 	for (int i = 0; i < vectorVertices.size(); i += 36) {
 		glm::vec3 max = glm::vec3(vectorVertices[i+32].x, vectorVertices[i+32].y, vectorVertices[i+32].z);
 		glm::vec3 min = glm::vec3(vectorVertices[i+28].x, vectorVertices[i+28].y, vectorVertices[i+28].z);
@@ -290,3 +226,4 @@ float calculateT(glm::vec3 normal,glm::vec3 position) {
 	float t = ((glm::dot(origin, normal)) + delta) / (glm::dot(direction, normal));
 	return t;
 }
+
