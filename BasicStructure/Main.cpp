@@ -31,8 +31,9 @@ int objectLocation = 0;
 //function template defined here
 void call_on_window_resize(GLFWwindow* window,int width,int height);//called on every window resized
 void processInput(GLFWwindow* window);//processes User Input
-void raycast(int ourColorLocation);
+void raycast();
 float calculateT(glm::vec3 normal,glm::vec3 position);
+void transparentBlock();
 
 //basic screen setting
 const unsigned int SCR_WIDTH = 800;
@@ -109,6 +110,7 @@ int main() {
 	int viewLoc = glGetUniformLocation(ourShader.ID, "view");
 	int projectionLoc = glGetUniformLocation(ourShader.ID,"projection");
 	int eyePosLoc = glGetUniformLocation(ourShader.ID,"eyePos");
+	int collidedObjectLoc = glGetUniformLocation(ourShader.ID, "collidedObject");
 
 	//activate the depth buffer
 	glEnable(GL_DEPTH_TEST);
@@ -118,7 +120,8 @@ int main() {
 	while (!glfwWindowShouldClose(window)) {
 		//process the user input
 		processInput(window);
-
+		vertexBufferObject->clearBuffer();
+		vertexBufferObject->generateBuffer();
 		//calculate delta Time
 		float currentFrame = glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
@@ -133,7 +136,7 @@ int main() {
 		ourShader.use();
 
 		////setting the uniform values only after we have activated the shader
-		glUniform4f(ourColorLocation, 1.0f, 1.0f, 1.0f, 1.0f);
+		glUniform4f(ourColorLocation, 0.3f, 0.3f, 0.3f, 1.0f);
 		texture1.setUniform();
 		glm::mat4 view = camera.viewMatrix();
 		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
@@ -145,7 +148,7 @@ int main() {
 		glBindVertexArray(bufferObject.VAO);
 
 		//Draw the world
-		raycast(ourColorLocation);
+		raycast();
 		worldGenerator.draw(&modelLoc);
 
 		//swap the buffer
@@ -191,18 +194,19 @@ void processInput(GLFWwindow *window) {
 		vertexBufferObject->clearBuffer();
 		vertexBufferObject->generateBuffer();
 	}
-	if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS) {
-		for (int i = 0; i < 36;i++ ) {
-			vectorVertices.erase(vectorVertices.begin()+objectLocation+i);
-		}
-		vertexBufferObject->clearBuffer();
-		vertexBufferObject->generateBuffer();
+}
+
+void nullTransparentBlock() {
+	for (int i = 0; i < 36; i++) {
+		vectorVertices[objectLocation + i].r = 1.0f;
+		vectorVertices[objectLocation + i].g = 1.0f;
+		vectorVertices[objectLocation + i].b = 1.0f;
+		vectorVertices[objectLocation + i].a = 1.0f;
 	}
 }
 
-
-void raycast(int ourColorLocation) {
-	glm::vec3 ray = camera.cameraPos + (camera.cameraFront * 3);
+void raycast() {
+	glm::vec3 ray = camera.cameraPos + (camera.cameraFront * 3.5);
 	for (int i = 0; i < vectorVertices.size(); i += 36) {
 		glm::vec3 max = glm::vec3(vectorVertices[i+32].x, vectorVertices[i+32].y, vectorVertices[i+32].z);
 		glm::vec3 min = glm::vec3(vectorVertices[i+28].x, vectorVertices[i+28].y, vectorVertices[i+28].z);
@@ -210,8 +214,10 @@ void raycast(int ourColorLocation) {
 		bool condition2 = min.y <= ray.y && ray.y <= max.y;
 		bool condition3 = max.z <= ray.z && ray.z <= min.z;
 		if (condition1 == true && condition2 == true && condition3 == true) {
+			nullTransparentBlock();
 			objectLocation = i;
-			std::cout << "hit detected at:-> "<<i << std::endl;
+			//std::cout << "hit detected at:-> "<<i << std::endl;
+			transparentBlock();
 		}
 	}
 }
@@ -225,5 +231,14 @@ float calculateT(glm::vec3 normal,glm::vec3 position) {
 	}
 	float t = ((glm::dot(origin, normal)) + delta) / (glm::dot(direction, normal));
 	return t;
+}
+
+void transparentBlock() {
+	for (int i = 0; i < 36; i++) {
+		vectorVertices[objectLocation+i].r = 0.3f;
+		vectorVertices[objectLocation+i].g = 0.3f;
+		vectorVertices[objectLocation+i].b = 0.3f;
+		vectorVertices[objectLocation+i].a = 1.0f;
+	}
 }
 
