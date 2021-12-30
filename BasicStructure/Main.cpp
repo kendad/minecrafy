@@ -28,6 +28,10 @@ ChunkGenerator chunkGenerator;
 VertexBuffer* vertexBufferObject;
 int objectLocation = 0;
 bool activateEditableBlock=false;
+bool enableEditMode = false;
+float translationX = 0.5;
+float translationY = 0.5;
+float translationZ = 0.5;
 
 //function template defined here
 void call_on_window_resize(GLFWwindow* window,int width,int height);//called on every window resized
@@ -172,7 +176,7 @@ int main() {
 			glUniformMatrix4fv(projectionLoc_editableBlock, 1, GL_FALSE, glm::value_ptr(projection));
 			glUniform3fv(eyePosLoc_editableBlock, 1, glm::value_ptr(camera.cameraPos));
 			glBindVertexArray(editableBufferObject.VAO);
-			worldGenerator.drawEditableBlock(&modelLoc_editableBlock, camera.cameraPos, camera.cameraFront,objectLocation);
+			worldGenerator.drawEditableBlock(&modelLoc_editableBlock, camera.cameraPos, camera.cameraFront,objectLocation,translationX,translationY,translationZ);
 		}
 
 		//swap the buffer
@@ -226,6 +230,93 @@ void processInput(GLFWwindow *window) {
 			activateEditableBlock = false;
 		}
 	}
+
+	//translate the editable block commands
+	//X
+	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
+		if (translationX+=(0.5*3) > vectorVertices[objectLocation+35].x+(0.5 * 3)) {
+			translationX = 0.5 * 3;
+		}
+		else {
+			translationX += (0.5 * 3);
+		}
+	}
+	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
+		if (translationX-=(0.5*1) < vectorVertices[objectLocation + 35].x - (0.5 * 1)) {
+			translationX = -(0.5 * 1);
+		}
+		else {
+			translationX -= (0.5 * 1);
+		}
+	}
+	//Y
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
+		if (translationY += (0.5 * 1) < vectorVertices[objectLocation + 35].y + (0.5 * 1)) {
+			translationY = (0.5 * 1);
+		}
+		else {
+			translationY += (0.5 * 1);
+		}
+	}
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
+		if (translationY -= (0.5 * 3) < vectorVertices[objectLocation + 35].y - (0.5 * 3)) {
+			translationY = -(0.5 * 3);
+		}
+		else {
+			translationY -= (0.5 * 3);
+		}
+	}
+	//Z
+	if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) {
+		if (translationZ -= (0.5 * 1) < vectorVertices[objectLocation + 35].z - (0.5 * 1)) {
+			translationZ = -(0.5 * 1);
+		}
+		else {
+			translationZ -= (0.5 * 1);
+		}
+	}
+	if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS) {
+		if (translationZ += (0.5 * 3) < vectorVertices[objectLocation + 35].z + (0.5 * 1)) {
+			translationZ = (0.5 * 3);
+		}
+		else {
+			translationZ += (0.5 * 3);
+		}
+	}
+	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
+		enableEditMode = true;
+		std::cout << enableEditMode << std::endl;
+	}
+	if (glfwGetKey(window, GLFW_KEY_KP_ADD) == GLFW_PRESS) {
+		if (enableEditMode == true) {
+			for (int i = 0; i < sizeof(plainCube) / sizeof(plainCube[0]); i += 12) {
+				Vertex tmpVertex;
+				tmpVertex.x = plainCube[i];
+				tmpVertex.y = plainCube[i + 1];
+				tmpVertex.z = plainCube[i + 2];
+
+				tmpVertex.u = plainCube[i + 3];
+				tmpVertex.v = plainCube[i + 4];
+
+				tmpVertex.nx = plainCube[i + 5];
+				tmpVertex.ny = plainCube[i + 6];
+				tmpVertex.nz = plainCube[i + 7];
+
+				tmpVertex.r = plainCube[i + 8];
+				tmpVertex.g = plainCube[i + 9];
+				tmpVertex.b = plainCube[i + 10];
+				tmpVertex.a = plainCube[i + 11];
+				//update the vector vertices
+				tmpVertex.x += vectorVertices[objectLocation+35].x+translationX;
+				tmpVertex.y += vectorVertices[objectLocation+35].y+translationY;
+				tmpVertex.z += vectorVertices[objectLocation+35].z-translationZ;
+				vectorVertices.push_back(tmpVertex);
+			}
+			vertexBufferObject->clearBuffer();
+			vertexBufferObject->generateBuffer();
+			enableEditMode = false;
+		}
+	}
 }
 
 void nullTransparentBlock() {
@@ -266,6 +357,9 @@ float calculateT(glm::vec3 normal,glm::vec3 position) {
 }
 
 void transparentBlock() {
+	translationX = 0.5;
+	translationY = 0.5;
+	translationZ = 0.5;
 	for (int i = 0; i < 36; i++) {
 		vectorVertices[objectLocation+i].r = 0.3f;
 		vectorVertices[objectLocation+i].g = 0.3f;

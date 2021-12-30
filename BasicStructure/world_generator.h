@@ -48,7 +48,7 @@ public:
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f,0.0f,0.0f));
 		glUniformMatrix4fv(*modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-		glDrawArrays(GL_TRIANGLES, 0, 36*50*50*50);
+		glDrawArrays(GL_TRIANGLES, 0, vectorVertices.size());
 		////type-2
 		//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -50*0.5*2));
 		//glUniformMatrix4fv(*modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -63,7 +63,7 @@ public:
 		//glDrawArrays(GL_TRIANGLES, 0, 36 * 50 * 50 * 50);
 	}
 
-	void drawEditableBlock(int* modelLoc, glm::vec3 cameraPos,glm::vec3 cameraDirection,int objectLocation,float translationX=0.5,float translationY=0.5,float translationZ=0.5) {
+	void drawEditableBlock(int* modelLoc, glm::vec3 cameraPos,glm::vec3 cameraDirection,int objectLocation,float translationX,float translationY,float translationZ) {
 		glm::mat4 model = glm::mat4(1.0f);
 		//UP =0.5
 		model = glm::translate(model, glm::vec3(vectorVertices[objectLocation+35].x+translationX, vectorVertices[objectLocation+35].y+translationY, vectorVertices[objectLocation+35].z+translationZ));
