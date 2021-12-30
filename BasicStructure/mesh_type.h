@@ -256,6 +256,7 @@ typedef struct {
 Vertex;
 
 std::vector<Vertex> vectorVertices;
+std::vector<Vertex> editableVectorVertices;
 
 class ChunkGenerator {
 public:
@@ -294,6 +295,7 @@ public:
         //    }
         //}
         generate_mesh_by_perlin_noise();
+        generateEditableBlock();
     }
 
     void drawCircle() {
@@ -405,5 +407,28 @@ public:
         for (i = 1; i < n; i++)
             total += arr[i];
         return round(((total) / (50 * 50)) * 50);
+    }
+
+    void generateEditableBlock() {
+        for (int i = 0; i < sizeof(plainCube) / sizeof(plainCube[0]); i += 12) {
+            Vertex tmpVertex;
+            tmpVertex.x = plainCube[i];
+            tmpVertex.y = plainCube[i + 1];
+            tmpVertex.z = plainCube[i + 2];
+
+            tmpVertex.u = plainCube[i + 3];
+            tmpVertex.v = plainCube[i + 4];
+
+            tmpVertex.nx = plainCube[i + 5];
+            tmpVertex.ny = plainCube[i + 6];
+            tmpVertex.nz = plainCube[i + 7];
+
+            tmpVertex.r = plainCube[i + 8];
+            tmpVertex.g = plainCube[i + 9];
+            tmpVertex.b = plainCube[i + 10];
+            tmpVertex.a = plainCube[i + 11];
+            //update the vector vertices
+            editableVectorVertices.push_back(tmpVertex);
+        }
     }
 };

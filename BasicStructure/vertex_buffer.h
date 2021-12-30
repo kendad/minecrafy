@@ -13,7 +13,7 @@ public:
 	unsigned int VBO;
 	unsigned int EBO;
 	//constructor
-	VertexBuffer(unsigned int (*indices)[6]=nullptr) {
+	VertexBuffer(std::vector<Vertex> vectorVertices,unsigned int (*indices)[6]=nullptr) {
 		generateBuffer(indices);
 	}
 

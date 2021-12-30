@@ -27,6 +27,7 @@ PerlinNoise perlinNoise;
 ChunkGenerator chunkGenerator;
 VertexBuffer* vertexBufferObject;
 int objectLocation = 0;
+bool activateEditableBlock=false;
 
 //function template defined here
 void call_on_window_resize(GLFWwindow* window,int width,int height);//called on every window resized
@@ -79,6 +80,7 @@ int main() {
 
 	//Initializing the Shader
 	Shader ourShader("shader.vs","shader.fs");
+	Shader blockShader("block.vs","block.fs");
 
 	//describing our mesh here
 	float vertices[] = {
@@ -94,13 +96,16 @@ int main() {
 	};
 	//#######################################################################################
 	//creating the VBO...EBO and then using the VAO
-	VertexBuffer bufferObject(&indices);
+	VertexBuffer bufferObject(vectorVertices);
+	VertexBuffer editableBufferObject(editableVectorVertices);
 	vertexBufferObject = &bufferObject;
 
 	//creating the texture
 	Texture texture1("minecraft.png", "PNG", ourShader.ID, 1, "texture2", true);
+	Texture texture2("minecraft.png", "PNG", blockShader.ID, 2, "texture2", true);
 	//activate the texture
 	texture1.activateTexture();
+	texture2.activateTexture();
 	//#######################################################################################
 
 
@@ -111,6 +116,13 @@ int main() {
 	int projectionLoc = glGetUniformLocation(ourShader.ID,"projection");
 	int eyePosLoc = glGetUniformLocation(ourShader.ID,"eyePos");
 	int collidedObjectLoc = glGetUniformLocation(ourShader.ID, "collidedObject");
+	//uniforms for the editable block
+	int ourColorLocation_editableBlock = glGetUniformLocation(blockShader.ID, "ourColor");
+	int modelLoc_editableBlock = glGetUniformLocation(blockShader.ID, "model");
+	int viewLoc_editableBlock = glGetUniformLocation(blockShader.ID, "view");
+	int projectionLoc_editableBlock = glGetUniformLocation(blockShader.ID, "projection");
+	int eyePosLoc_editableBlock = glGetUniformLocation(blockShader.ID, "eyePos");
+	int collidedObjectLoc_editableBlock = glGetUniformLocation(blockShader.ID, "collidedObject");
 
 	//activate the depth buffer
 	glEnable(GL_DEPTH_TEST);
@@ -150,6 +162,18 @@ int main() {
 		//Draw the world
 		raycast();
 		worldGenerator.draw(&modelLoc);
+
+		//for editable block
+		if (activateEditableBlock) {
+			blockShader.use();
+			texture2.setUniform();
+			glUniform4f(ourColorLocation_editableBlock, 0.3f, 0.3f, 0.3f, 1.0f);
+			glUniformMatrix4fv(viewLoc_editableBlock, 1, GL_FALSE, glm::value_ptr(view));
+			glUniformMatrix4fv(projectionLoc_editableBlock, 1, GL_FALSE, glm::value_ptr(projection));
+			glUniform3fv(eyePosLoc_editableBlock, 1, glm::value_ptr(camera.cameraPos));
+			glBindVertexArray(editableBufferObject.VAO);
+			worldGenerator.drawEditableBlock(&modelLoc_editableBlock, camera.cameraPos, camera.cameraFront,objectLocation);
+		}
 
 		//swap the buffer
 		glfwSwapBuffers(window);
@@ -193,6 +217,14 @@ void processInput(GLFWwindow *window) {
 		chunkGenerator.generate_mesh_by_perlin_noise();
 		vertexBufferObject->clearBuffer();
 		vertexBufferObject->generateBuffer();
+	}
+	if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS) {
+		if (activateEditableBlock == false) {
+			activateEditableBlock = true;
+		}
+		else {
+			activateEditableBlock = false;
+		}
 	}
 }
 
