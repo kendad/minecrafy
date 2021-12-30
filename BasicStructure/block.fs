@@ -36,6 +36,6 @@ vec3 specular=(specularProp*spec)*lightColor;
 vec3 ambient=(ambientProp)*vec3(1.0);//this vec3 is the light intensity
 vec3 resultantColor=ambient+diffuse+specular;
 
-FragColor=texture(texture1,TextCoord)*vec4(resultantColor,1.0)*vertexColor;
+FragColor=texture(texture1,TextCoord)*vec4(resultantColor,1.0)*vertexColor*ourColor;
 	
 }

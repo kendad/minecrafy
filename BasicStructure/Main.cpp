@@ -171,7 +171,7 @@ int main() {
 		if (activateEditableBlock) {
 			blockShader.use();
 			texture2.setUniform();
-			glUniform4f(ourColorLocation_editableBlock, 0.3f, 0.3f, 0.3f, 1.0f);
+			glUniform4f(ourColorLocation_editableBlock, 0.8f, 0.3f, 0.3f, 1.0f);
 			glUniformMatrix4fv(viewLoc_editableBlock, 1, GL_FALSE, glm::value_ptr(view));
 			glUniformMatrix4fv(projectionLoc_editableBlock, 1, GL_FALSE, glm::value_ptr(projection));
 			glUniform3fv(eyePosLoc_editableBlock, 1, glm::value_ptr(camera.cameraPos));
